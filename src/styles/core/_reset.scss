@@ -1,0 +1,54 @@
+html,
+body {
+  font-family: "Nunito Sans", sans-serif;
+  font-optical-sizing: auto;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  @apply bg-tertiary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Squada One", sans-serif;
+}
+
+img {
+  display: block;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@-moz-document url-prefix() {
+  * {
+    scrollbar-color: #2d2c2e #cb2b61;
+    scrollbar-width: thin;
+
+    &:hover {
+      scrollbar-color: #2d2c2e #b42656;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  @apply w-3 bg-inherit opacity-0;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-[#2d2c2e] rounded-[100vw] shadow-sm;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-primary to-cornflower rounded-[100vw] border-[2.2px] border-solid border-[#2d2c2e];
+
+  &:hover {
+    @apply bg-gradient-to-b from-primary-600 to-cornflower-600;
+  }
+}

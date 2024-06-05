@@ -1,0 +1,222 @@
+.text-field {
+  @apply relative w-full;
+
+  label {
+    @apply absolute
+      z-10
+      left-3
+      xl:left-4
+      top-[50%]
+      block
+      text-sm
+      uppercase
+      rounded-1
+      font-medium
+      tracking-wide
+      bg-transparent
+      translate-y-[-50%]
+      text-info-100/60;
+
+    transition: 0.7s !important;
+  }
+
+  input {
+    @apply p-3
+      xl:p-4
+      rounded-2
+      relative
+      z-20
+      text-[15px]
+      outline-none
+      bg-transparent
+      selection:bg-info
+      selection:text-info-content
+      border border-info-100/60 text-info-100/60 hover:border-info-100/80 hover:text-info-100/80 transition-colors;
+
+    width: 100%;
+    background: transparent;
+    transition: 0.7s !important;
+
+    &:focus {
+      @apply border-info-300;
+    }
+
+    &:focus ~ label {
+      @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
+    }
+
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px #161517 inset;
+      -webkit-text-fill-color: rgb(187 227 251 / 0.6);
+    }
+
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0px 1000px #161517 inset;
+      -webkit-text-fill-color: rgb(187 227 251 / 0.6);
+    }
+
+    /* For Firefox */
+    &:-moz-autofill {
+      box-shadow: 0 0 0px 1000px #161517 inset;
+      text-fill-color: rgb(187 227 251 / 0.6);
+    }
+
+    /* Ensure background color remains consistent when autofill is active in Firefox */
+    &:-moz-autofill:focus,
+    &:-moz-autofill:hover,
+    &:-moz-autofill:active {
+      box-shadow: 0 0 0px 1000px #161517 inset;
+      text-fill-color: rgb(187 227 251 / 0.6);
+    }
+  }
+
+  &--filled ~ label {
+    @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
+  }
+
+  &__error {
+    @apply text-primary/80 text-[13px] lg:text-[15px] text-sm mt-2;
+
+    input {
+      &:invalid {
+        @apply border-danger-100/60 text-danger-100/60;
+
+        & ~ label {
+          @apply text-danger-100/60;
+        }
+
+        &:focus ~ label {
+          @apply bg-danger-300 text-danger-900;
+        }
+
+        &:focus {
+          @apply border-danger-300;
+        }
+
+        .text-field {
+          @apply border-danger-100;
+        }
+      }
+    }
+  }
+}
+
+.text-area {
+  @apply relative w-full;
+
+  label {
+    @apply absolute
+      z-10
+      left-3
+      xl:left-4
+      top-3
+      xl:top-4
+      block
+      text-sm
+      uppercase
+      rounded-1
+      font-medium
+      tracking-wide
+      bg-transparent
+      text-info-100/60;
+
+    transition: 0.7s !important;
+  }
+
+  textarea {
+    @apply p-3
+      xl:p-4
+      rounded-2
+      relative
+      z-20
+      text-[15px]
+      outline-none
+      bg-transparent
+      selection:bg-info
+      selection:text-info-content
+      border border-info-100/60 text-info-100/60 hover:border-info-100/80 hover:text-info-100/80 transition-colors;
+
+    width: 100%;
+    background: transparent;
+    transition: 0.7s !important;
+
+    &:focus {
+      @apply border-info-300;
+    }
+
+    &:valid ~ label,
+    &:focus ~ label {
+      @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[4.85%] translate-y-[4.85%];
+    }
+  }
+}
+
+.select-field {
+  @apply relative w-full;
+
+  label {
+    @apply absolute
+      z-10
+      left-3
+      xl:left-4
+      top-[50%]
+      block
+      text-sm
+      uppercase
+      rounded-1
+      font-medium
+      tracking-wide
+      bg-transparent
+      translate-y-[-50%]
+      text-info-100/60;
+
+    transition: 0.7s !important;
+  }
+
+  select {
+    @apply p-3
+      xl:p-4
+      rounded-2
+      relative
+      z-20
+      text-[15px]
+      outline-none
+      appearance-none
+      bg-transparent
+      selection:bg-info
+      selection:text-info-content
+      border border-info-100/60 text-info-100/60 hover:border-info-100/80 hover:text-info-100/80 transition-colors;
+
+    width: 100%;
+    background: transparent;
+    transition: 0.7s !important;
+
+    option {
+      cursor: pointer;
+      @apply bg-info-100/90 text-info-800 font-medium text-sm xl:text-[15px];
+
+      &:hover {
+        @apply bg-info/90 text-info-100/90;
+      }
+    }
+
+    &:focus {
+      @apply border-info-300;
+    }
+
+    &:valid ~ label,
+    &:focus ~ label {
+      @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
+    }
+
+    & ~ div > i {
+      @apply text-info-100/60;
+    }
+
+    &:focus ~ div > i {
+      @apply text-info-300;
+    }
+  }
+}

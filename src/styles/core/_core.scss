@@ -1,0 +1,91 @@
+.section {
+  @apply w-full
+  lg:w-[85%]
+  2xl:w-[65%]
+    py-24
+    px-5
+    z-10
+    
+    flex
+    flex-col
+    items-start
+    
+    gap-y-12;
+
+  h3,
+  .h3 {
+    @apply font-squada-one font-medium text-5xl 2xl:text-6xl leading-[1.2] tracking-tight;
+  }
+
+  h4,
+  .h4 {
+    @apply font-squada-one font-medium text-4xl 2xl:text-5xl leading-[1.2] tracking-tight;
+  }
+
+  h5,
+  .h5 {
+    @apply font-squada-one font-medium text-3xl 2xl:text-4xl leading-[1.2] tracking-tight;
+  }
+
+  p,
+  .p {
+    @apply font-nunito-sans text-lg 2xl:text-xl text-inherit;
+  }
+
+  .sub-section {
+    @apply w-full flex flex-col gap-y-6;
+  }
+
+  ul {
+    @apply flex flex-col;
+
+    li {
+      @apply relative font-nunito-sans text-xl text-inherit;
+    }
+  }
+
+  .blockquote {
+    @apply card rounded-7 relative z-10 font-nunito-sans text-4xl bg-tertiary-500 text-inherit font-light tracking-tight;
+
+    &:hover {
+      .after-layer {
+        @apply bg-info-200/70;
+      }
+    }
+  }
+}
+
+.footer {
+  @apply w-full
+    lg:w-[85%]
+    2xl:w-[65%]
+    py-10;
+}
+
+.card {
+  &:hover {
+    .card__media {
+      @apply filter
+      saturate-50
+      hue-rotate-180;
+    }
+  }
+}
+
+.container {
+  @apply w-[calc(100%-40px)] lg:w-[80%] py-10 lg:py-20 relative z-10;
+}
+
+.animate-btn {
+  &:active:focus,
+  &:active:hover {
+    animation: button-pop 0s ease-out;
+    transform: scale(var(--btn-focus-scale, 0.97));
+  }
+
+  &::focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+    outline-offset: 2px;
+  }
+}
