@@ -56,10 +56,6 @@ const SignIn: FC = ({}) => {
     authModalVisibilityAtom
   );
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6d5aae2ac0afe02ae898402273c25a7a4ab37207
   const formRef = {
     passwordRef: useRef<HTMLInputElement>(null),
     emailOrUsernameRef: useRef<HTMLInputElement>(null)
