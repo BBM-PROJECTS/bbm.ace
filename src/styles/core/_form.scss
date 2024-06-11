@@ -15,7 +15,7 @@
       tracking-wide
       bg-transparent
       translate-y-[-50%]
-      text-info-100/60;
+      text-bronze-100/60;
 
     transition: 0.7s !important;
   }
@@ -29,38 +29,38 @@
       text-[15px]
       outline-none
       bg-transparent
-      selection:bg-info
+      selection:bg-bronze
       selection:text-info-content
-      border border-info-100/60 text-info-100/60 hover:border-info-100/80 hover:text-info-100/80 transition-colors;
+      border border-bronze-100/60 text-bronze-100/60 hover:border-bronze-100/80 hover:text-bronze-100/80 transition-colors;
 
     width: 100%;
     background: transparent;
     transition: 0.7s !important;
 
     &:focus {
-      @apply border-info-300;
+      @apply border-bronze-300;
     }
 
     &:focus ~ label {
-      @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
+      @apply bg-bronze-500 z-30 font-semibold px-2 py-1 text-bronze-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
     }
 
     &:-webkit-autofill {
       -webkit-box-shadow: 0 0 0px 1000px #161517 inset;
-      -webkit-text-fill-color: rgb(187 227 251 / 0.6);
+      -webkit-text-fill-color: rgb(240 217 194 / 0.6);
     }
 
     &:-webkit-autofill:focus,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:active {
       -webkit-box-shadow: 0 0 0px 1000px #161517 inset;
-      -webkit-text-fill-color: rgb(187 227 251 / 0.6);
+      -webkit-text-fill-color: rgb(240 217 194 / 0.6);
     }
 
     /* For Firefox */
     &:-moz-autofill {
       box-shadow: 0 0 0px 1000px #161517 inset;
-      text-fill-color: rgb(187 227 251 / 0.6);
+      text-fill-color: rgb(240 217 194 / 0.6);
     }
 
     /* Ensure background color remains consistent when autofill is active in Firefox */
@@ -68,16 +68,16 @@
     &:-moz-autofill:hover,
     &:-moz-autofill:active {
       box-shadow: 0 0 0px 1000px #161517 inset;
-      text-fill-color: rgb(187 227 251 / 0.6);
+      text-fill-color: rgb(240 217 194 / 0.6);
     }
   }
 
   &--filled ~ label {
-    @apply bg-info-300 z-30 font-semibold px-2 py-1 text-info-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
+    @apply bg-bronze-300 z-30 font-semibold px-2 py-1 text-bronze-900 text-xs xl:text-[13px] -top-[40%] translate-y-[40%];
   }
 
   &__error {
-    @apply text-primary/80 text-[13px] lg:text-[15px] text-sm mt-2;
+    @apply text-primary/80 text-[13px] lg:text-[15px] mt-2;
 
     input {
       &:invalid {
@@ -100,6 +100,11 @@
         }
       }
     }
+  }
+
+  &__success {
+    @apply
+      text-lemon/80 text-[13px] lg:text-[15px] mt-2;
   }
 }
 

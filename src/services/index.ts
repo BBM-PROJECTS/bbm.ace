@@ -1,4 +1,5 @@
 export { HttpService } from "./http.service";
+export { LookupService } from "./lookup.service";
 export { StorageService } from "./storage.service";
 export type {
   THttpResponse,
@@ -6,3 +7,6 @@ export type {
   TMeta,
   TPaginatedHttpResponse
 } from "./http.service";
+export type {
+  TIPDetails
+} from "./lookup.service";

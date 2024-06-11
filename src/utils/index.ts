@@ -1,5 +1,6 @@
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
+import unset from "lodash/unset";
 import filter from "lodash/filter";
 import find from "lodash/find";
 import reduce from "lodash/reduce";
@@ -17,6 +18,7 @@ import toLength from "lodash/toLength";
 export {
   isEmpty,
   map,
+  unset,
   filter,
   find,
   reduce,

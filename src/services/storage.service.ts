@@ -1,69 +1,98 @@
 export class StorageService {
-  private storage: Storage | null = null;
+  private dbName: string;
+  private storeName: string;
 
-  constructor() {
-    if (typeof window !== "undefined") {
-      this.storage = localStorage;
+  constructor(dbName = 'bbm-ace', storeName = 'ace-store') {
+    this.dbName = dbName;
+    this.storeName = storeName;
+
+    if (typeof window !== 'undefined') {
+      this.initDB();
     }
   }
 
-  setItem(key: string, value: any): void {
-    if (this.storage) {
-      this.storage.setItem(key, JSON.stringify(value));
-    } else {
-      console.warn("Storage is not available on the server.");
-      // Handle or log the situation where storage is not available (e.g., use an alternative approach).
-    }
+  private initDB(): void {
+    const request = indexedDB.open(this.dbName, 1);
+
+    request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
+      const db = (event.target as IDBOpenDBRequest).result;
+      if (!db.objectStoreNames.contains(this.storeName)) {
+        db.createObjectStore(this.storeName, { keyPath: 'key' });
+      }
+    };
+
+    request.onerror = () => {
+      console.error("IndexedDB initialization error");
+    };
   }
 
-  getItem(key: string): any {
-    if (this.storage) {
-      const storedValue = this.storage.getItem(key);
-      return storedValue ? JSON.parse(storedValue) : null;
-    } else {
-      console.warn("Storage is not available on the server.");
-      return null; // Return null or handle the situation where storage is not available.
-    }
+  private getDB(): Promise<IDBDatabase> {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(this.dbName);
+
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+
+      request.onerror = () => {
+        reject("IndexedDB connection error");
+      };
+    });
   }
 
-  clearItem(key: string): void {
-    if (this.storage) {
-      this.storage.removeItem(key);
-    } else {
-      console.warn("Storage is not available on the server.");
-      // Handle or log the situation where storage is not available (e.g., use an alternative approach).
-    }
+  private async withStore(type: IDBTransactionMode, callback: (store: IDBObjectStore) => void): Promise<void> {
+    const db = await this.getDB();
+    const transaction = db.transaction(this.storeName, type);
+    const store = transaction.objectStore(this.storeName);
+    callback(store);
+
+    return new Promise((resolve, reject) => {
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = () => reject("IndexedDB transaction error");
+    });
   }
 
-  // Additional methods for sessionStorage
-  setSessionItem(key: string, value: any): void {
-    if (typeof window !== "undefined") {
-      this.storage = sessionStorage;
-      this.storage.setItem(key, JSON.stringify(value));
-    } else {
-      console.warn("sessionStorage is not available on the server.");
-      // Handle or log the situation where sessionStorage is not available.
-    }
+  async setItem(key: string, value: any): Promise<void> {
+    return this.withStore('readwrite', (store) => {
+      store.put({ key, value });
+    });
   }
 
-  getSessionItem(key: string): any {
-    if (typeof window !== "undefined") {
-      this.storage = sessionStorage;
-      const storedValue = this.storage.getItem(key);
-      return storedValue ? JSON.parse(storedValue) : null;
-    } else {
-      console.warn("sessionStorage is not available on the server.");
-      return null; // Return null or handle the situation where sessionStorage is not available.
-    }
+  async getItem(key: string): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+      await this.withStore('readonly', (store) => {
+        const request = store.get(key);
+
+        request.onsuccess = () => {
+          resolve(request.result ? request.result.value : null);
+        };
+
+        request.onerror = () => {
+          reject("IndexedDB get item error");
+        };
+      });
+    });
   }
 
-  clearSessionItem(key: string): void {
-    if (typeof window !== "undefined") {
-      this.storage = sessionStorage;
-      this.storage.removeItem(key);
-    } else {
-      console.warn("sessionStorage is not available on the server.");
-      // Handle or log the situation where sessionStorage is not available.
-    }
+  async clearItem(key: string): Promise<void> {
+    return this.withStore('readwrite', (store) => {
+      store.delete(key);
+    });
+  }
+
+  // Additional methods for sessionStorage-like functionality
+  async setSessionItem(key: string, value: any): Promise<void> {
+    // Implementation can be similar to setItem, targeting a different store if needed
+    return this.setItem(key, value);
+  }
+
+  async getSessionItem(key: string): Promise<any> {
+    // Implementation can be similar to getItem, targeting a different store if needed
+    return this.getItem(key);
+  }
+
+  async clearSessionItem(key: string): Promise<void> {
+    // Implementation can be similar to clearItem, targeting a different store if needed
+    return this.clearItem(key);
   }
 }
