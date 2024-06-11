@@ -76,6 +76,16 @@
   @apply w-[calc(100%-40px)] lg:w-[80%] py-10 lg:py-20 relative z-10;
 }
 
+.toolbar {
+  &__media-img {
+    filter: grayscale(100%);
+  }
+}
+
+.sepia-monochrome {
+  filter: sepia(0.8) saturate(50%) hue-rotate(30deg);
+}
+
 .animate-btn {
   &:active:focus,
   &:active:hover {

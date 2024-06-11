@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Key, ReactNode } from "react";
 
 export type TAppLayoutProps = {
   children: ReactNode;
@@ -55,20 +55,54 @@ export type TTierDetailProps = {
   type: "bronze" | "silver" | "gold" | "platinum" | "diamond";
 };
 
-export type TUListProps = {
-  className?: string;
-  children: ReactNode;
-  iconClassName?: string;
-  contentClassName?: string;
-  align?: "start" | "center";
-  type?: "bullseye" | "candlestick" | "waterfall" | "line-up";
+export type TListCardItem = {
+  copy: string;
+  iconName?: string;
+  icon: "bullseye" | "candlestick" | "waterfall" | "line-up" | "custom";
+}
+
+export type TInfoCardProps = {
+  src: string;
+  heading: string;
+  subheading: string;
+}
+
+export type TListCardProps = {
+  key?: Key | null;
+  heading: string;
+  subheading: string;
+  items: TListCardItem[];
   theme?:
+    | "info"
     | "primary"
     | "secondary"
     | "accent"
     | "yellow"
     | "success"
-    | "info"
     | "cornflower"
     | "danger";
+};
+
+export type TUListProps = {
+  className?: string;
+  children: ReactNode;
+  iconName?: string;
+  iconClassName?: string;
+  contentClassName?: string;
+  align?: "start" | "center";
+  type?: "bullseye" | "candlestick" | "waterfall" | "line-up" | "custom";
+  theme?:
+    | "info"
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "yellow"
+    | "success"
+    | "cornflower"
+    | "danger";
+};
+
+export type TAccordionProps = {
+  question: string;
+  answer: ReactNode;
 };

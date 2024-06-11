@@ -29,8 +29,8 @@ export type TPaginatedHttpResponse<T> = {
 
 export type THttpResponse<T = any> = {
   data: T;
-  success: boolean;
   message: string;
+  isSuccessful: boolean;
 };
 
 export class HttpService {
@@ -48,12 +48,14 @@ export class HttpService {
     this.http.interceptors.request.use((config) => {
       this.cancelTokenSource = axios.CancelToken.source();
       config.cancelToken = this.cancelTokenSource.token;
+
       return config;
     });
 
     // Handle response and errors
     this.http.interceptors.response.use(
       (response) => {
+
         return response;
       },
       (error) => {
@@ -62,6 +64,7 @@ export class HttpService {
         } else {
           console.error("Error fetching data:", error);
         }
+
         return Promise.reject(error);
       }
     );
