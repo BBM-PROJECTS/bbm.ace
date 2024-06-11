@@ -68,7 +68,6 @@ const Home = () => {
   const mixins = useMixins();
 
   const storage = new StorageService();
-
   const [authModalType, setAuthModalType] = useRecoilState(authModalTypeAtom);
   const [authModalVisibility, setAuthModalVisibility] = useRecoilState(
     authModalVisibilityAtom
