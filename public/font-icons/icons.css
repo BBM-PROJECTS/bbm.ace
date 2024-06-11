@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?2jrobm');
-  src:  url('fonts/icomoon.eot?2jrobm#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?2jrobm') format('truetype'),
-    url('fonts/icomoon.woff?2jrobm') format('woff'),
-    url('fonts/icomoon.svg?2jrobm#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?cexl04');
+  src:  url('fonts/icomoon.eot?cexl04#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?cexl04') format('truetype'),
+    url('fonts/icomoon.woff?cexl04') format('woff'),
+    url('fonts/icomoon.svg?cexl04#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -132,6 +132,30 @@
 }
 .icon-playlist:before {
   content: "\e940";
+}
+.icon-medal-ribbon-star:before {
+  content: "\e978";
+}
+.icon-sitemap:before {
+  content: "\e979";
+}
+.icon-trees:before {
+  content: "\e97a";
+}
+.icon-lock-keyhole-unlocked:before {
+  content: "\e97b";
+}
+.icon-puzzle-piece:before {
+  content: "\e97c";
+}
+.icon-tag:before {
+  content: "\e97d";
+}
+.icon-dollar-coin:before {
+  content: "\e97e";
+}
+.icon-user-check:before {
+  content: "\e97f";
 }
 .icon-x:before {
   content: "\e977";

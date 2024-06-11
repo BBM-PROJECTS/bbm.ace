@@ -33,17 +33,17 @@ const colors = {
     900: "#171717"
   },
   tertiary: {
-    DEFAULT: "#161517",
+    DEFAULT: "#0f0e10",
     hover: "#3A3A3A",
-    content: "#f1f1f1",
-    50: "#ffffff",
-    100: "#e6e6e6",
-    200: "#3A3A3A",
-    300: "#28272A",
+    content: "#e7e7e7",
+    50: "#cfcfcf",
+    100: "#b7b7b7",
+    200: "#878788",
+    300: "#575658",
     400: "#262626",
-    500: "#2d2c2e",
-    600: "#161517",
-    700: "#141414",
+    500: "#272628",
+    600: "#0f0e10",
+    700: "#0E0E0E",
     800: "#181818",
     900: "#000000"
   },
@@ -211,6 +211,21 @@ const colors = {
     700: "#94795e",
     800: "#63513f",
     900: "#31281f"
+  },
+  lemon: {
+    DEFAULT: "#adf802",
+    hover: "#8ac602",
+    content: "#f7fee6",
+    50: "#f7fee6",
+    100: "#e6fdb3",
+    200: "#d6fc81",
+    300: "#c6fa4e",
+    400: "#b5f91b",
+    500: "#adf802",
+    600: "#8ac602",
+    700: "#689501",
+    800: "#456301",
+    900: "#111900"
   }
 };
 
@@ -298,8 +313,13 @@ module.exports = {
       backgroundImage: {
         "divider": "url('/images/divider.svg')",
         "info-bg": "url('/images/info-glow.svg')",
+        "amber-glow": "url('/images/amber-glow.svg')",
+        "cover-top": "url('/images/bg-cover-top.svg')",
+        "cover-left": "url('/images/bg-cover-left.svg')",
         "primary-glow": "url('/images/primary-glow.svg')",
+        "abstract": "url('/images//images/abstract.webp')",
         "info-round-bg": "url('/images/info-round-glow.svg')",
+        "dark-info-glow": "url('/images/dark-info-glow.svg')",
         "cornflower-bg": "url('/images/cornflow-top-glow.svg')",
         "primary-round-glow": "url('/images/primary-round-glow.svg')",
         "greater-than": "url('/images/greater-than-illustration.svg')"

@@ -33,7 +33,6 @@ import { Fragment } from "react";
 
 // PROVIDERS
 import { MixinsProvider } from "@/providers";
-// import { AppLayout } from "@/layouts";
 
 // UTILS
 import { toString } from "@/utils";
@@ -42,14 +41,20 @@ import { toString } from "@/utils";
 import { emitter } from "@/events";
 
 // SERVICES
-import { StorageService } from "@/services";
+import { StorageService, LookupService } from "@/services";
 
 // NEXT
 import type { AppProps } from "next/app";
 
+// HOOKS
+import { useIPInfo } from "@/hooks";
+
+const lookup = new LookupService();
 const storage = new StorageService();
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const ipInfo = useIPInfo();
+
   emitter.on("opened", () => {
     setTimeout(() => {
       storage.setItem("AUTH_MODAL_STATUS", toString(true));
@@ -61,6 +66,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       storage.clearItem("AUTH_MODAL_STATUS");
     }, 1000);
   });
+
+  console.log({ ipInfo });
 
   return (
     <Fragment>
@@ -75,6 +82,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         stopDelayMs={200}
         startPosition={0.3}
         showOnShallow={true}
+        options={{
+          showSpinner: true
+        }}
         color="linear-gradient(90deg, rgba(101, 110, 244,1) 0%, rgba(225, 48, 108,1) 50%, rgba(245, 158, 11,1) 100%)"
       />
     </Fragment>
