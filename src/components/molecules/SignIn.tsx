@@ -2,9 +2,11 @@ import React, { Fragment, FC, useEffect, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useRecoilState } from "recoil";
-import Link from "next/link";
 import clsx from "clsx";
 import { TextField } from "@/components/form";
+
+// HOST TOAST
+import { toast } from "react-hot-toast";
 
 // STORE
 import { authModalTypeAtom, authModalVisibilityAtom } from "@/store";
@@ -54,6 +56,7 @@ const SignIn: FC = ({}) => {
     authModalVisibilityAtom
   );
 
+
   const formRef = {
     passwordRef: useRef<HTMLInputElement>(null),
     emailOrUsernameRef: useRef<HTMLInputElement>(null)
@@ -81,7 +84,8 @@ const SignIn: FC = ({}) => {
       const { isSuccessful, message, data } = response.data;
 
       if (isSuccessful) {
-        alert(message);
+        toast.success(message);
+        console.log({ data });
 
         return true;
       } else {

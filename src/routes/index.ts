@@ -12,6 +12,9 @@ export const apiRoutes = {
   TOKEN_MANAGER: "/auth/token-manager",
   USER_REGISTER: "/auth/register",
 
+  // NEWSLETTER
+  SUBSCRIBE_TO_NEWSLETTER: "/newsletter/subscribe",
+
   // LOOKUP
   IP_DETAILS: "/lookup/ip-details",
   CHECK_USERNAME_AVAILABILITY: (queryParams: any) => {

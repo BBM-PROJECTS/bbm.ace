@@ -22,6 +22,8 @@ import "@fontsource/open-sans/700.css";
 import "@fontsource/open-sans/800.css";
 import "@fontsource/open-sans/400-italic.css";
 
+import clsx from "clsx";
+
 // STORE
 import { RecoilRoot } from "recoil";
 
@@ -33,6 +35,9 @@ import { Fragment } from "react";
 
 // PROVIDERS
 import { MixinsProvider } from "@/providers";
+
+// HOT TOAST
+import { resolveValue, Toaster } from "react-hot-toast";
 
 // UTILS
 import { toString } from "@/utils";
@@ -71,6 +76,48 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <Fragment>
+      <Toaster position="top-right" toastOptions={{ duration: 6000 }}>
+        {(t) => {
+          return (
+            <div
+              className={clsx(
+                "shadow-lg text-[15px] bg-gradient-to-br from-tertiary-900 via-[#151105]/95 to-tertiary-900 text-gold border border-tertiary-300/50 outline-none font-open-sans rounded-lg md:min-w-[400px] max-w-[400px] p-5 flex flex-col",
+                {
+                  "from-tertiary-900 via-[#16050b]/95 to-tertiary-900 text-primary":
+                    resolveValue(t.type, t) === "error",
+                  "from-tertiary-900 via-[#111900]/95 to-tertiary-900 text-lemon-600":
+                    resolveValue(t.type, t) === "success",
+                  "from-tertiary-900 via-[#140d05]/95 to-tertiary-900 text-bronze":
+                    resolveValue(t.type, t) === "loading"
+                }
+              )}
+            >
+              <>
+                <div className="flex items-start space-x-2 w-full">
+                  <div className="h-7 w-7 rounded-full grid place-items-center">
+                    <i
+                      className={clsx(
+                        "text-[22px] font-bold",
+                        resolveValue(t.type, t) === "error" && "icon-x-circle",
+                        resolveValue(t.type, t) === "success" &&
+                          "icon-check-badge",
+                        resolveValue(t.type, t) === "loading"
+                          ? "loading loading-spinner loading-sm"
+                          : "icon-info-circle"
+                      )}
+                    ></i>
+                  </div>
+
+                  <p className="font-medium text-[15px]">
+                    {resolveValue(t.message, t)}
+                  </p>
+                </div>
+              </>
+            </div>
+          );
+        }}
+      </Toaster>
+
       <RecoilRoot>
         <MixinsProvider>
           <Component {...pageProps} />

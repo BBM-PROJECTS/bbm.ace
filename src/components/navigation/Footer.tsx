@@ -27,6 +27,12 @@ const Footer = () => {
     return date.getFullYear();
   }, [date]);
 
+  const email = "support@bullbearmastery.com";
+  const subject = 'Support Request';
+  const body = 'Hi Support Team,';
+
+  const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
   return (
     <Fragment>
       <footer className="w-full grid place-items-center bg-tertiary/20 relative">
@@ -43,14 +49,14 @@ const Footer = () => {
               />
             </div>
 
-            <p className="text-info-content/90 text-sm leading-6">
+            <p className="text-bronze-content/90 text-sm leading-6">
               BullBear Mastery Ace helps traders of all levels learn how to trade
               the financial markets.
             </p>
           </div>
 
           <div className="col-span-12 lg:col-span-4 flex flex-col gap-y-6">
-            <h5 className="font-squada-one text-info-content/90 font-medium !tracking-[.01em] text-[20px] lg:text-[22px]">
+            <h5 className="font-squada-one text-bronze-content/90 font-medium !tracking-[.01em] text-[20px] lg:text-[22px]">
               Inside BullBear Mastery Ace
             </h5>
 
@@ -58,7 +64,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight"
                 >
                   Home
                 </Link>
@@ -66,7 +72,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/about"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight"
                 >
                   About BullBear Mastery Ace
                 </Link>
@@ -74,7 +80,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/contact-us"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight"
                 >
                   Contact Us
                 </Link>
@@ -83,7 +89,7 @@ const Footer = () => {
           </div>
 
           <div className="col-span-12 lg:col-span-4 flex flex-col gap-y-6">
-            <h5 className="font-squada-one text-info-content/90 font-medium !tracking-[.01em] text-[20px] lg:text-[22px]">
+            <h5 className="font-squada-one text-bronze-content/90 font-medium !tracking-[.01em] text-[20px] lg:text-[22px]">
               Support
             </h5>
 
@@ -91,7 +97,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
                 >
                   <Image
                     width={18}
@@ -106,7 +112,7 @@ const Footer = () => {
               <li>
                 <Link
                   href={"/"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
                 >
                   <Image
                     width={18}
@@ -119,20 +125,20 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href={"/"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
+                <a
+                  href={mailtoLink}
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
                 >
-                  <i className="icon-email text-info-content/90 text-[16px]"></i>
+                  <i className="icon-email text-bronze-content/90 text-[16px]"></i>
                   <span>support@bullbearmastery.com</span>
-                </Link>
+                </a>
               </li>
               <li>
                 <Link
                   href={"/"}
-                  className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
+                  className="text-bronze-50/90 hover:text-bronze-200/90 focus:text-bronze-200/80 active:text-bronze-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
                 >
-                  <i className="icon-help-center text-info-content/90 text-[16px]"></i>
+                  <i className="icon-help-center text-bronze-content/90 text-[16px]"></i>
                   <span>Visit Help Center</span>
                 </Link>
               </li>
@@ -147,7 +153,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="Facebook Page Link"
                 aria-roledescription="Facebook Page Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -161,7 +167,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="Instagram Page Link"
                 aria-roledescription="Instagram Page Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -175,7 +181,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="TikTok Page Link"
                 aria-roledescription="Tiktok Page Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -189,7 +195,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="LinkedIn Page Link"
                 aria-roledescription="LinkedIn Page Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -203,7 +209,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="Telegram Channel Link"
                 aria-roledescription="Telegram Channel Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -217,7 +223,7 @@ const Footer = () => {
                 target={"_blank"}
                 role="Dicord Group Link"
                 aria-roledescription="Telegram Channel Link"
-                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-info-600 bg-info-50/90 hover:bg-info hover:text-info-50/90 focus:bg-info/80 focus:text-info-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
+                className="btn btn-sm btn-circle p-1 h-8 w-8 rounded-full grid place-items-center text-bronze-600 bg-bronze-50/90 hover:bg-bronze hover:text-bronze-50/90 focus:bg-bronze/80 focus:text-bronze-50/90 focus:outline-none border-none transition-all relative overflow-hidden"
               >
                 <i
                   role="icon"
@@ -231,17 +237,17 @@ const Footer = () => {
 
         <div className="w-full grid place-items-center bg-tertiary-500/15 relative z-10">
           <div className="footer flex flex-col items-center">
-            <p className="text-info-content/90 flex items-center text-sm">
+            <p className="text-bronze-content/90 flex items-center text-sm">
               BullBear Mastery Ace (BBM Team) | &copy; {getCurrentYear}
             </p>
           </div>
         </div>
 
         <div className="footer relative z-10">
-          <div className="flex flex-col gap-y-4 w-full text-info-content/90 text-xs lg:text-sm">
+          <div className="flex flex-col gap-y-4 w-full text-bronze-content/90 text-xs lg:text-sm">
             <p>
               Risk Disclaimer: Trading financial markets carries inherent risk.
-              The information provided on [invalid URL removed] and within the
+              The bronzermation provided on [invalid URL removed] and within the
               BBM Trading Academy platform is intended for educational purposes
               only and should not be construed as financial advice. Before
               trading, carefully consider your investment objectives, experience
@@ -288,7 +294,7 @@ const Footer = () => {
 
         <div className="w-full grid place-items-center bg-tertiary-500/15 relative z-10">
           <div className="py-4 px-5 flex flex-col items-center">
-            <p className="text-info-content/90 flex items-center text-sm">
+            <p className="text-bronze-content/90 flex items-center text-sm">
               Bulls Make Money, Bears Take Money, Pigs Get Slaughtered
             </p>
           </div>

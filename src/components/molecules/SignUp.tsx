@@ -4,7 +4,12 @@ import * as Yup from "yup";
 import { useRecoilState } from "recoil";
 import Link from "next/link";
 import clsx from "clsx";
+
+// FOEM
 import { TextField } from "@/components/form";
+
+// HOT TOAST
+import { toast } from "react-hot-toast";
 
 // STORE
 import { authModalTypeAtom, authModalVisibilityAtom } from "@/store";
@@ -22,6 +27,7 @@ import { HttpService, THttpResponse } from "@/services";
 import { useRouter } from "next/router";
 import { useIPInfo } from "@/hooks";
 import { cloneDeep, unset } from "@/utils";
+import { systemErrorMsg } from "@/constants";
 
 // TYPES
 type TFormInputs = {
@@ -96,15 +102,19 @@ const SignUp: FC = () => {
       const { isSuccessful, message, data } = response.data;
 
       if (isSuccessful) {
-        alert(message);
-        
+        toast.success(message);
+
         return true;
       } else {
+        toast.error(message);
         http.cancelRequest();
         return false;
       }
     } catch (error: any) {
-      console.error({ error });
+      const errorMsg = error?.response?.data?.message;
+      const message = errorMsg || systemErrorMsg;
+
+      toast.error(message);
 
       http.cancelRequest();
       return false;
@@ -158,7 +168,7 @@ const SignUp: FC = () => {
     actions: FormikHelpers<TFormInputs>
   ) => {
     const clonedValues = cloneDeep(values);
-    unset(clonedValues, 'agreeToTerms');
+    unset(clonedValues, "agreeToTerms");
 
     const payload = {
       ...clonedValues,

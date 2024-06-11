@@ -109,6 +109,8 @@ export const contacts = {
   airtel: "08087290322"
 };
 
+export const platform = "BBM Ace";
+
 export const emptyStateCopy =
   "Currently no updates. Please try again later or explore other sections.";
 export const emptyStateCopyTwo =

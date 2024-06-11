@@ -1,4 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
+
+// HOST TOAST
+import { toast } from "react-hot-toast";
 
 // NEXT IMAGE
 import Image from "next/image";
@@ -20,10 +23,14 @@ import { Toolbar, Footer } from "@/components/navigation";
 import { Accordion, InfoCard, List, ListCard, Modal } from "@/components/core";
 
 // CONSTANTS
-import { infoList, pointList } from "@/constants";
+import { infoList, platform, pointList } from "@/constants";
 
 // SERVICES
-import { StorageService } from "@/services";
+import {
+  HttpService,
+  StorageService,
+  THttpResponse
+} from "@/services";
 
 // ROUTER
 import { useRouter } from "next/router";
@@ -32,15 +39,91 @@ import { useRouter } from "next/router";
 import { isEmpty } from "@/utils";
 import { NeedHelp, SignIn, SignUp } from "@/components/molecules";
 
+// ROUTES
+import { apiRoutes } from "@/routes";
+
+// FORMIK
+import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+
+// TYPES
+type TFormInputs = {
+  email: string;
+};
+
+type TFormRequestInput = {
+  platform: string;
+};
+
+const http = new HttpService();
+
+const newsletterValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Your email address is invalid")
+    .required("Your email address is required!")
+});
+
 const Home = () => {
   const router = useRouter();
   const mixins = useMixins();
 
   const storage = new StorageService();
+
   const [authModalType, setAuthModalType] = useRecoilState(authModalTypeAtom);
   const [authModalVisibility, setAuthModalVisibility] = useRecoilState(
     authModalVisibilityAtom
   );
+
+  const newsletterInitialValues: TFormInputs = { email: "" };
+  const newsletterFormRef = {
+    emailRef: useRef<HTMLInputElement>(null)
+  };
+
+  const subscribeAction = async (payload: TFormInputs & TFormRequestInput) => {
+    try {
+      const response = await http
+        .service()
+        .push<THttpResponse>(apiRoutes.SUBSCRIBE_TO_NEWSLETTER, payload);
+
+      const { isSuccessful, message, data } = response.data;
+
+      if (isSuccessful) {
+        toast.success(message);
+
+        console.log({ data });
+
+        return true;
+      } else {
+        http.cancelRequest();
+
+        return false;
+      }
+    } catch (error: any) {
+      console.error({ error });
+
+      return false;
+    }
+  };
+
+  const onSubmitNewsletter = async (
+    values: TFormInputs,
+    actions: FormikHelpers<TFormInputs>
+  ) => {
+    const payload = {
+      ...values,
+      platform
+    };
+
+    const result = await subscribeAction(payload);
+
+    if (result) {
+      actions.resetForm();
+
+      setTimeout(() => {
+        actions.setSubmitting(false);
+      }, 1000);
+    }
+  };
 
   const authModalStatus = () => {
     const jsonPayload = storage.getItem("AUTH_MODAL_STATUS");
@@ -89,7 +172,9 @@ const Home = () => {
               cash out with confidence!
             </p>
 
-            <button onClick={() => router.push("/dashboard")} className="btn bg-gradient-to-br from-info-400 via-info-500 to-info-900 shadow-inner shadow-info text-info-content hover:from-primary-400 hover:via-primary-500 hover:to-primary-900 hover:shadow-primary rounded-full uppercase px-8 py-4 h-auto font-open-sans font-semibold border-none focus:outline-none text-base transition-colors">
+            <button
+              className="btn bg-gradient-to-br from-info-400 via-info-500 to-info-900 shadow-inner shadow-info text-info-content hover:from-primary-400 hover:via-primary-500 hover:to-primary-900 hover:shadow-primary rounded-full uppercase px-8 py-4 h-auto font-open-sans font-semibold border-none focus:outline-none text-base transition-colors"
+            >
               Let's do this
             </button>
 
@@ -452,29 +537,57 @@ const Home = () => {
           </List.UL>
 
           <div className="flex flex-col bg-cornflower-900 w-[90%] self-center rounded-7 py-14 px-6 relative overflow-hidden shadow-inner">
-            <form
-              onSubmit={() => {}}
-              className="w-[80%] lg:w-[70%] 2xl:w-[60%] grid grid-cols-12 gap-y-8 self-center place-items-center"
+            <Formik
+              initialValues={newsletterInitialValues}
+              validationSchema={newsletterValidationSchema}
+              onSubmit={onSubmitNewsletter}
+              validateOnBlur
             >
-              <div className="col-span-12 w-full">
-                <TextField
-                  label="EMAIL ADDRESS"
-                  type={"email"}
-                  name="emailAddress"
-                  role="textbox"
-                  required
-                />
-              </div>
+              {({ isSubmitting, handleBlur }) => (
+                <Form className="w-[80%] lg:w-[70%] 2xl:w-[60%] grid grid-cols-12 gap-y-8 self-center place-items-center">
+                  <div className="col-span-12 w-full">
+                    <Field
+                      type="email"
+                      name="email"
+                      render={({ field }: any) => (
+                        <TextField
+                          {...field}
+                          type="email"
+                          role="textbox"
+                          label="EMAIL ADDRESS"
+                          ref={newsletterFormRef.emailRef}
+                          onBlur={(e) => {
+                            handleBlur(e);
+                            field.onBlur(e);
+                          }}
+                        />
+                      )}
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="p"
+                      className="text-field__error animate__animated animate__shakeX animate__slow"
+                    />
+                  </div>
 
-              <div className="col-span-12">
-                <button
-                  type="submit"
-                  className="btn btn-info px-8 rounded-full uppercase hover:bg-primary hover:text-primary-content hover:border-primary focus:bg-primary-700 font-semibold tracking-[.01em] transition duration-[0.5s]"
-                >
-                  Subscribe & Level Up!
-                </button>
-              </div>
-            </form>
+                  <div className="col-span-12">
+                    <button
+                      type="submit"
+                      className={`btn btn-info px-8 rounded-full uppercase hover:bg-primary hover:text-primary-content hover:border-primary font-semibold tracking-[.01em] transition duration-[0.5s] ${isSubmitting && "pointer-events-none"}`}
+                    >
+                      <span
+                        className={`loading loading-spinner loading-sm animate__animated animate__fadeIn ${isSubmitting ? "inline-block" : "hidden"}`}
+                      ></span>
+                      <span>
+                        {isSubmitting
+                          ? "Please wait..."
+                          : "Subscribe & Level Up!"}
+                      </span>
+                    </button>
+                  </div>
+                </Form>
+              )}
+            </Formik>
 
             <div className="h-24 w-24 absolute top-[-10%] left-[-3%] bg-info-100/50 rounded-full"></div>
             <div className="h-32 w-32 absolute bottom-[-10%] right-[-5%] bg-info-200/40 rounded-full"></div>
@@ -493,7 +606,6 @@ const Home = () => {
       </section>
 
       <Footer />
-
 
       {/* MODALS */}
       <Modal
