@@ -129,7 +129,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href={"/"}
+                  href={"/help-center"}
                   className="text-info-50/90 hover:text-info-200/90 focus:text-info-200/80 active:text-info-400/90 text-sm font-medium tracking-tight flex items-center gap-x-2"
                 >
                   <i className="icon-help-center text-info-content/90 text-[16px]"></i>
